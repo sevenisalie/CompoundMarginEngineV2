@@ -35,6 +35,7 @@ type Borrowers = {
 export default class Scrapinator {
     public initialization: boolean = false
     public borrowers: Borrowers = []
+    public borrowerAddresses: string[] | null = null
     public marketTokens: (MarketToken)[] = []
     private signer!: SignerWithAddress;
     public comptroller!: Comptroller;
@@ -57,6 +58,7 @@ export default class Scrapinator {
         await this.loadComptroller()
         await this.loadTokens()
         await this.updateBlockHeight()
+        await this.loadBorrowers()
         this.owner = this.signer?.address
         this.initialization = true
         return this.initialization
@@ -147,6 +149,9 @@ export default class Scrapinator {
     }
 
     public async aggregateAddresses(_data: any) {
+        if (this.borrowers.length == 0) {
+            await this.loadBorrowers()
+        }
         const mergedMarketAddresses = []
         const allMarketAddresses = _data.map((market: any, i: any) => {
             const marketAddresses = market.borrowers.map((borrower: any, j: number) => {
@@ -160,8 +165,8 @@ export default class Scrapinator {
         function removeDuplicates(dataset: any) {
             return [...new Set(dataset)];
         }
-        const pureAddresses = removeDuplicates(mergedMarketAddresses)
-
+        const pureAddresses = removeDuplicates(mergedMarketAddresses) as string[]
+        this.borrowerAddresses = pureAddresses
         return pureAddresses
     }
 
