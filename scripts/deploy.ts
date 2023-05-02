@@ -1,18 +1,25 @@
-import { ethers } from "hardhat";
+import { ethers, run } from "hardhat";
+import dotenv from 'dotenv'
+dotenv.config()
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const unlockTime = currentTimestampInSeconds + 60;
 
-  const lockedAmount = ethers.utils.parseEther("0.001");
+  // const MulticallFactory = await ethers.getContractFactory("MultiCall");
+  // const Multicall = await MulticallFactory.deploy();
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  // await Multicall.deployed();
 
-  await lock.deployed();
+  await run("verify:verify", {
+    address: "0x55e364e365363c0107cfa398b73b5014ba8860de",
+    constructorArguments: [
+    ],
+  });
 
   console.log(
-    `Lock with ${ethers.utils.formatEther(lockedAmount)}ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+    `Multicall deployed to ${"0x55e364e365363c0107cfa398b73b5014ba8860de"}
+    ***************************************************
+    Multicall verified on etherscan with name Multicall
+    `
   );
 }
 

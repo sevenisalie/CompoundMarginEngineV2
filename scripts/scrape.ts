@@ -3,7 +3,7 @@
 //sort them into markets
 //calculate their liquidity ratio
 //save spicy ones to special spicy users data structure //
-import { Contract, Signer } from "ethers"
+import { BytesLike, Contract, Signer, getDefaultProvider } from "ethers"
 import { ethers } from "hardhat"
 import { CONTRACTS, MARKET_TOKENS } from "./consts"
 import { OMatic } from "../typechain-types/contracts/Ovix-contracts-master/otokens/OMatic"
@@ -11,7 +11,16 @@ import { OErc20 } from "../typechain-types/contracts/Ovix-contracts-master/otoke
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers"
 import { Comptroller } from "../typechain-types/contracts/Ovix-contracts-master/Comptroller.sol"
 import { TypedEvent } from "../typechain-types/common"
-type MarketToken = {
+import { MultiCall } from "../typechain-types"
+import { MulticallProvider, MulticallWrapper } from "ethers-multicall-provider/lib"
+import { Fragment } from "@ethersproject/abi"
+import { BaseProvider } from "@ethersproject/providers"
+
+type callData = {
+    params: any[];
+    userAddress: any;
+}
+export type MarketToken = {
     contract: OMatic;
     address: string;
     name: string;
@@ -21,7 +30,7 @@ type MarketToken = {
     name: string;
 }
 
-type Borrowers = {
+export type Borrowers = {
     marketToken: MarketToken;
     borrowers: {
         block: any;
@@ -53,14 +62,28 @@ export default class Scrapinator {
         const _end = await this.signer.provider?.getBlockNumber() || 88 //a nice low number thats not 69
         this.end = _end
     }
+
     public async init() {
+        console.log("A")
         await this.loadSigner()
+        console.log("B")
         await this.loadComptroller()
+        console.log("C")
         await this.loadTokens()
+        console.log("D")
+
         await this.updateBlockHeight()
+        console.log("E")
+
         await this.loadBorrowers()
+        console.log("F")
+
+        await this.loadBorrowerAddresses()
+        console.log("G")
+
         this.owner = this.signer?.address
         this.initialization = true
+
         return this.initialization
     }
 
@@ -106,9 +129,7 @@ export default class Scrapinator {
 
 
     private async _fetchBorrowers() {
-        if (!this.initialization) {
-            await this.init()
-        }
+
         const filters = this.marketTokens.map(token => {
             const filter = token.contract.filters.Borrow()
             const request = token.contract.queryFilter(
@@ -148,12 +169,12 @@ export default class Scrapinator {
         return rawBorrowers
     }
 
-    public async aggregateAddresses(_data: any) {
+    public async aggregateAddresses() {
         if (this.borrowers.length == 0) {
             await this.loadBorrowers()
         }
         const mergedMarketAddresses = []
-        const allMarketAddresses = _data.map((market: any, i: any) => {
+        const allMarketAddresses = this.borrowers.map((market: any, i: any) => {
             const marketAddresses = market.borrowers.map((borrower: any, j: number) => {
                 return borrower.address
             })
@@ -170,4 +191,77 @@ export default class Scrapinator {
         return pureAddresses
     }
 
+    public async loadBorrowerAddresses() {
+        const p = await this.aggregateAddresses()
+        this.borrowerAddresses = p
+        return true
+    }
+
+    public async fetchUserLiquidity(address: string) {
+        const call = await this.comptroller.getAccountLiquidity(address)
+        return {
+            error: call[0],
+            liquidity: call[1],
+            shortfall: call[2]
+        }
+    }
+
+    public async fetchAllUserLiquidity() {
+        if (this.borrowerAddresses?.length == null) {
+            await this.aggregateAddresses()
+        }
+        const mappedCalls = this.borrowerAddresses?.map((address) => {
+            return this.comptroller.getAccountLiquidity(address)
+        }) as any
+        const resolvedCalls = await Promise.all(mappedCalls)
+        return resolvedCalls
+    }
+}
+
+export class Multicall {
+    public signer: SignerWithAddress
+    public contract: MultiCall;
+    public target: Contract;
+    public provider: MulticallProvider<BaseProvider>;
+    constructor(_signer: SignerWithAddress, _target: Contract, _targetFunctionSignature: any, _contract: MultiCall) {
+        this.signer = _signer
+        const provider = _signer.provider as BaseProvider
+        this.contract = _contract
+        const frags = _target.interface.fragments as Fragment[]
+        this.provider = MulticallWrapper.wrap(provider)
+        this.target = new ethers.Contract(_target.address, _target.interface, this.provider)
+
+    }
+
+
+
+    public chunkCalls(calldata: callData[], chunkSize: number) {
+        const numChunks = Math.ceil(calldata.length / chunkSize);
+        return Array.from({ length: numChunks }, (_, index) => {
+            const start = index * chunkSize;
+            const end = start + chunkSize;
+            return calldata.slice(start, end);
+        });
+    }
+
+    public async batchCalls(_data: any[]) {
+        const chunks = this.chunkCalls(_data, 10)
+        console.log(`Total Data Lenght ${_data.length}`)
+        console.log(`There are ${chunks.length} chunks`)
+        console.log(`Each Chunks has ${chunks[0].length}`)
+        console.log(chunks[30])
+        const promies = chunks[30].map((calldata) => {
+            return this.target.getAccountLiquidity(...calldata.params)
+        })
+        const calls = await Promise.all(promies)
+        const callss = calls.map((call, i) => {
+            return {
+                data: call,
+                user: chunks[30][i].userAddress
+            }
+        })
+        console.log((await this.target.getAccountLiquidity(callss[1].user)))
+        return callss
+
+    }
 }

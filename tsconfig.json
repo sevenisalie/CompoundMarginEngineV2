@@ -6,6 +6,11 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "paths": {
+      "ethers-multicall-provider": [
+        "./node_modules/ethers-multicall-provider/lib/index"
+      ]
+    },
   }
 }
