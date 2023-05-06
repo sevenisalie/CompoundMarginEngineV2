@@ -1,5 +1,6 @@
 import { ethers } from "hardhat"
 import Scrapinator, { Multicall } from "./scrape"
+import Databasinator from "./database"
 const signature = "function getAccountLiquidity(address account) public view returns (uint256, uint256, uint256)"
 const main = async () => {
     const scrape = new Scrapinator()
@@ -12,6 +13,8 @@ const main = async () => {
 
     console.log("Fin")
     console.log(scrape.borrowerLiquidity.length)
+
+
     return
 }
 

@@ -4,23 +4,24 @@ import mongoose, { Mongoose, mongo } from "mongoose"
 
 dotenv.config()
 
-type User = {
+export type User = {
     userAddress: string,
     marginCondition: {
         error: BigNumber,
         liquidity: BigNumber,
         shortfall: BigNumber
     },
-    deposits: {
+    deposits?: {
         tokenAddress: string,
         tokenName: string,
         depositAmount: BigNumber
     }[],
-    borrows: {
+    borrows?: {
         tokenAddress: string,
         tokenName: string,
         borrowAmount: BigNumber
-    }[]
+    }[],
+    risk?: Number
 }
 
 export default class Databasinator {
@@ -36,17 +37,19 @@ export default class Databasinator {
         borrowAmount: Number
     })
 
+    private marginConditionSchema = new mongoose.Schema({
+        error: { type: Number, required: true },
+        liquidity: { type: Number, required: true },
+        shortfall: { type: Number, required: true }
+    })
 
-    private userSchema = new mongoose.Schema({
-        userAddress: String,
-        marginCondition: {
-            error: Number,
-            liquidity: Number,
-            shortfall: Number
-        },
-        deposits: [this.depositsSchema],
-        borrows: [this.borrowsSchema],
-        risk: Number // 0, 1, 2 low to high risk
+
+    private userSchema = new mongoose.Schema<User>({
+        userAddress: { type: String, required: true },
+        marginCondition: { type: this.marginConditionSchema, required: true },
+        deposits: { type: [this.depositsSchema], required: false },
+        borrows: { type: [this.borrowsSchema], required: false },
+        risk: { type: Number, required: false }, // 0, 1, 2 low to high risk
     })
 
     public User = mongoose.model("User", this.userSchema)
@@ -54,7 +57,11 @@ export default class Databasinator {
     constructor() {
 
     }
-
+    public async initDB() {
+        const init = await this.connect()
+        if (init == null) { console.log("Failed to connect to DB, Please Ensure Connection via correct URL exists") }
+        return
+    }
     public async connect() {
         try {
             const URI = process.env.DATABASE_URL!
@@ -75,13 +82,44 @@ export default class Databasinator {
         if (query.length == 0) { return true } else { return false }
     }
 
+    public async validateUserAddresses(_userAddresses: string[]) {
+        const isUniqueUserProms = _userAddresses.map((address) => {
+            const isUnique = this.verifyUniqueUser(address)
+            return isUnique
+        })
+        const resolve = await Promise.all(isUniqueUserProms)
+
+        const uniqueAddresses = []
+        for (let i = 0; i < resolve.length; i++) {
+            if (resolve[i]) {
+                uniqueAddresses.push(_userAddresses[i])
+            }
+        }
+        return uniqueAddresses
+    }
 
     public async insertUsersInBatches(documents: User[], batchSize: number) {
-        const numBatches = Math.ceil(documents.length / batchSize);
+        //validation
+        const addresses = documents.map((user) => {
+            return user.userAddress
+        })
+
+        const uniqueAddresses = await this.validateUserAddresses(addresses)
+
+        const uniqueDocuments = documents.map((document, i) => {
+            if (uniqueAddresses.includes(document.userAddress)) {
+                return document
+            }
+        })
+
+        //batching
+        const numBatches = Math.ceil(uniqueDocuments.length / batchSize);
+
         for (let i = 0; i < numBatches - 1; i++) {
             const startIndex = i * batchSize;
             const endIndex = startIndex + batchSize;
-            const batch = documents.slice(startIndex, endIndex);
+            const batch = uniqueDocuments.slice(startIndex, endIndex);
+
 
             try {
                 await this.User.insertMany(batch);
@@ -91,7 +129,7 @@ export default class Databasinator {
         }
         // insert the final batch separately
         const startIndex = (numBatches - 1) * batchSize;
-        const finalBatch = documents.slice(startIndex);
+        const finalBatch = uniqueDocuments.slice(startIndex);
         try {
             await this.User.insertMany(finalBatch);
         } catch (error) {

@@ -15,6 +15,7 @@ import { MultiCall } from "../typechain-types"
 import { MulticallProvider, MulticallWrapper } from "ethers-multicall-provider/lib"
 import { Fragment } from "@ethersproject/abi"
 import { BaseProvider } from "@ethersproject/providers"
+import Databasinator, { User } from "./database"
 
 type callData = {
     params: any[];
@@ -54,6 +55,8 @@ export default class Scrapinator {
     public start = 1
     public end = 69
     private failedLiquidityCallAddresses: string[] = []
+    private database = new Databasinator()
+
     constructor() {
 
     }
@@ -68,20 +71,27 @@ export default class Scrapinator {
             for (let i = 0; i < chunks?.length; i++) {
                 try {
                     console.log(`calling chunk ${i}`)
-                    console.log(chunks[i])
+
 
                     const callChunk = await this.multicall?.batchCalls(chunks[i], "getAccountLiquidity")
 
                     const cleaned = callChunk?.map((chunk) => {
                         return {
-                            user: chunk.user,
-                            condition: {
+                            userAddress: chunk.user,
+                            marginCondition: {
                                 error: chunk.data[0],
                                 liquidity: chunk.data[1],
                                 shortfall: chunk.data[2]
-                            }
+                            },
                         }
                     })
+
+                    const docs = cleaned?.map((user) => {
+                        return new this.database.User(user)
+                    }) as User[] //this is a pig wrapped in shit, youre welcome
+                    console.log("saved to db")
+
+                    await this.database.insertUsersInBatches(docs, 10)
 
                     temp.push(cleaned)
                     console.log(`success pushed chunk ${i}`)
@@ -95,7 +105,6 @@ export default class Scrapinator {
                 const flattened = temp.flat(1)
                 this.failedLiquidityCallAddresses = failedtemp
                 this.borrowerLiquidity = flattened
-                return flattened
             }
         } else {
             throw new Error("Borrower Accounts Were not Properly Loaded")
@@ -129,6 +138,8 @@ export default class Scrapinator {
         await this.loadBorrowerAddresses()
         console.log("G")
 
+        await this.database.initDB()
+        console.log("H")
         this.multicall = new Multicall(this.signer, this.comptroller)
         this.owner = this.signer?.address
         this.initialization = true
