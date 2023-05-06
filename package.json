@@ -17,6 +17,7 @@
     "ethers": "^5.4.7",
     "hardhat": "^2.14.0",
     "hardhat-gas-reporter": "^1.0.8",
+    "prisma": "^4.13.0",
     "solidity-coverage": "^0.8.0",
     "ts-node": ">=8.0.0",
     "typechain": "^8.1.0",
@@ -30,6 +31,7 @@
     "@openzeppelin/contracts-upgradeable": "^4.8.3",
     "dotenv": "^16.0.3",
     "ethers-multicall": "^0.2.3",
-    "ethers-multicall-provider": "sevenisalie/ethers-multicall-provider"
+    "ethers-multicall-provider": "sevenisalie/ethers-multicall-provider",
+    "mongoose": "^7.1.0"
   }
 }

@@ -45,13 +45,61 @@ export default class Scrapinator {
     public initialization: boolean = false
     public borrowers: Borrowers = []
     public borrowerAddresses: string[] | null = null
+    public borrowerLiquidity: any[] = []
     public marketTokens: (MarketToken)[] = []
     private signer!: SignerWithAddress;
     public comptroller!: Comptroller;
+    public multicall: Multicall | undefined;
     public owner: string = ""
     public start = 1
     public end = 69
+    private failedLiquidityCallAddresses: string[] = []
     constructor() {
+
+    }
+
+    public async loadAccountsLiquidity() {
+        if (this.borrowerAddresses !== null) {
+            console.log("Beginning Loading")
+            const data = this.borrowerAddresses
+            const temp = []
+            const chunks: any = this.multicall?.chunkCalls(data, 10)
+            const failedtemp = []
+            for (let i = 0; i < chunks?.length; i++) {
+                try {
+                    console.log(`calling chunk ${i}`)
+                    console.log(chunks[i])
+
+                    const callChunk = await this.multicall?.batchCalls(chunks[i], "getAccountLiquidity")
+
+                    const cleaned = callChunk?.map((chunk) => {
+                        return {
+                            user: chunk.user,
+                            condition: {
+                                error: chunk.data[0],
+                                liquidity: chunk.data[1],
+                                shortfall: chunk.data[2]
+                            }
+                        }
+                    })
+
+                    temp.push(cleaned)
+                    console.log(`success pushed chunk ${i}`)
+                } catch (error) {
+                    failedtemp.push(...chunks[i])
+                    console.log(`failed pushing chunk ${i} sent to failedarray`)
+                    console.log(`total failes ${Math.floor(this.failedLiquidityCallAddresses.length / 20)}`)
+                    console.log(error)
+                    await new Promise(r => setTimeout(r, 3000));
+                }
+                const flattened = temp.flat(1)
+                this.failedLiquidityCallAddresses = failedtemp
+                this.borrowerLiquidity = flattened
+                return flattened
+            }
+        } else {
+            throw new Error("Borrower Accounts Were not Properly Loaded")
+        }
 
     }
 
@@ -81,6 +129,7 @@ export default class Scrapinator {
         await this.loadBorrowerAddresses()
         console.log("G")
 
+        this.multicall = new Multicall(this.signer, this.comptroller)
         this.owner = this.signer?.address
         this.initialization = true
 
@@ -220,22 +269,16 @@ export default class Scrapinator {
 
 export class Multicall {
     public signer: SignerWithAddress
-    public contract: MultiCall;
     public target: Contract;
     public provider: MulticallProvider<BaseProvider>;
-    constructor(_signer: SignerWithAddress, _target: Contract, _targetFunctionSignature: any, _contract: MultiCall) {
+    constructor(_signer: SignerWithAddress, _target: Contract) {
         this.signer = _signer
         const provider = _signer.provider as BaseProvider
-        this.contract = _contract
-        const frags = _target.interface.fragments as Fragment[]
         this.provider = MulticallWrapper.wrap(provider)
         this.target = new ethers.Contract(_target.address, _target.interface, this.provider)
-
     }
 
-
-
-    public chunkCalls(calldata: callData[], chunkSize: number) {
+    public chunkCalls(calldata: any[], chunkSize: number) {
         const numChunks = Math.ceil(calldata.length / chunkSize);
         return Array.from({ length: numChunks }, (_, index) => {
             const start = index * chunkSize;
@@ -244,23 +287,22 @@ export class Multicall {
         });
     }
 
-    public async batchCalls(_data: any[]) {
-        const chunks = this.chunkCalls(_data, 10)
-        console.log(`Total Data Lenght ${_data.length}`)
-        console.log(`There are ${chunks.length} chunks`)
-        console.log(`Each Chunks has ${chunks[0].length}`)
-        console.log(chunks[30])
-        const promies = chunks[30].map((calldata) => {
-            return this.target.getAccountLiquidity(...calldata.params)
+    public async batchCalls(_data: any[], _functionName: string) {
+        if (_data.length > 20) {
+            throw new Error(`Multicall can only handle 20 congruous calls, please limit the lenght of calls to 20`)
+        }
+
+        const promies = _data.map((calldata) => {
+            return this.target["getAccountLiquidity"](calldata)
         })
         const calls = await Promise.all(promies)
         const callss = calls.map((call, i) => {
             return {
                 data: call,
-                user: chunks[30][i].userAddress
+                user: _data[i]
             }
         })
-        console.log((await this.target.getAccountLiquidity(callss[1].user)))
+
         return callss
 
     }
