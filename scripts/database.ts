@@ -7,7 +7,7 @@ dotenv.config()
 export type User = {
     userAddress: string,
     marginCondition: {
-        error: BigNumber,
+        error: Number,
         liquidity: BigNumber,
         shortfall: BigNumber
     },
@@ -28,19 +28,19 @@ export default class Databasinator {
     private depositsSchema = new mongoose.Schema({
         tokenAddress: String,
         tokenName: String,
-        depositAmount: Number
+        depositAmount: Object
     })
 
     private borrowsSchema = new mongoose.Schema({
         tokenAddress: String,
         tokenName: String,
-        borrowAmount: Number
+        borrowAmount: Object
     })
 
     private marginConditionSchema = new mongoose.Schema({
         error: { type: Number, required: true },
-        liquidity: { type: Number, required: true },
-        shortfall: { type: Number, required: true }
+        liquidity: { type: Object, required: true },
+        shortfall: { type: Object, required: true }
     })
 
 
@@ -58,9 +58,12 @@ export default class Databasinator {
 
     }
     public async initDB() {
-        const init = await this.connect()
-        if (init == null) { console.log("Failed to connect to DB, Please Ensure Connection via correct URL exists") }
-        return
+        try {
+            const init = await this.connect()
+            if (init == null) { console.log("Failed to connect to DB, Please Ensure Connection via correct URL exists") }
+            return
+        } catch (err) { console.log(err) }
+
     }
     public async connect() {
         try {
@@ -134,6 +137,37 @@ export default class Databasinator {
             await this.User.insertMany(finalBatch);
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    public async getUserByAddress(_userAddress: string) {
+        try {
+            const query = await this.User.find({ userAddress: _userAddress })
+            return query
+        } catch (err) {
+            console.log(err)
+            return undefined
+        }
+    }
+
+    public async getLiquidities() {
+
+        try {
+            const query = await this.User.find().where("marginCondition.liquidity").gt(1000000000000000000000)
+            return query
+        } catch (err) {
+            console.log(err)
+            return undefined
+        }
+    }
+
+    public async getShortfalls() {
+        try {
+            const query = await this.User.find().where("marginCondition.shortfall").gt(0)
+            return query
+        } catch (err) {
+            console.log(err)
+            return undefined
         }
     }
 

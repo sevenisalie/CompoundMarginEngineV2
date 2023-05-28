@@ -55,7 +55,7 @@ export default class Scrapinator {
     public start = 1
     public end = 69
     private failedLiquidityCallAddresses: string[] = []
-    private database = new Databasinator()
+    public database = new Databasinator()
 
     constructor() {
 

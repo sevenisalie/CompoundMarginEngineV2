@@ -29,6 +29,7 @@
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3",
     "@openzeppelin/contracts-upgradeable": "^4.8.3",
+    "chalk": "^5.2.0",
     "dotenv": "^16.0.3",
     "ethers-multicall": "^0.2.3",
     "ethers-multicall-provider": "sevenisalie/ethers-multicall-provider",

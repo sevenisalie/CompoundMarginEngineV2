@@ -1,0 +1,887 @@
+[
+    {
+        "pair": "0xc44AD482f24fd750cAeBa387d2726d8653F8c4bB",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        }
+    },
+    {
+        "pair": "0x9fd8e8Ad363CF670900C58D06BC3D8CF73C4E362",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xFb700249845aDcF3F31F7C279493F8914873Dd6c",
+            "symbol": "PzkDoge",
+            "name": "Poly zkDoge",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x267816F8789a28463cE10acD50ffeDDE57F318Ee",
+        "token0": {
+            "address": "0x3dc1607D48Ec9f8ea1993eD96255883E68852C05",
+            "symbol": "pzkDOGE",
+            "name": "Poly zkDoge",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x9F1542e1a8E0f93D2c4d00c30cB71865826488FD",
+        "token0": {
+            "address": "0x0a66A8e9570318aA36278957567A027Dd6263625",
+            "symbol": "pzkSHIBA",
+            "name": "Poly ZK Shiba",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x4b8f52c68594554DdF13aff5E2d8d788bC56Ca8c",
+        "token0": {
+            "address": "0x18811cE10Ca15a0c96969FBDA73AE31CC86aEbba",
+            "symbol": "PZKINU",
+            "name": "PolyZKInu",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x33ACBF603d499e76a6E755aDF545C5e93167Fd26",
+        "token0": {
+            "address": "0x3FC99E99e17B2767E223C84b36de19eb21d1A4b2",
+            "symbol": "zktest",
+            "name": "zktets",
+            "decimals": 9
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x489C58d2DF8E9445fBF80dF7B0aF003e2e2cEe5d",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x93d08526F9D802a2292fB8faf253AF169Cb6B7E0",
+            "symbol": "TEMPLATE_SYMBOL",
+            "name": "TEMPLATE_NAME",
+            "decimals": 4
+        }
+    },
+    {
+        "pair": "0xF8d4563Aa0B6608326c5F14a257d576eA7a71Ba6",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xCaBbbD51cCD3E66017036ec8876abe8DDfE92132",
+            "symbol": "ZKFLOKI",
+            "name": "zkFLOKI",
+            "decimals": 8
+        }
+    },
+    {
+        "pair": "0x7D9195077671B08F442B2A1b310858bDB1C4abcc",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xa1CC2ecE1437067362fa2a5C72C32375ce335643",
+            "symbol": "PZKCAT",
+            "name": "PZK CAT",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xfeA27Bd015EA6F867e890AB8C1C5DA35fe2Dec81",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x9A553cF3c384922b0d49BB033069dA2a30dD22e3",
+            "symbol": "ZkPolyBBDoge",
+            "name": "ZKPolyBBDoge",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xC6c893a0dCf31b5766Ac5c103AF9e9805A6d0774",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x56C5D491d66e86240732B6849f421AAbD4829d8B",
+            "symbol": "PZKFLOKI",
+            "name": "PolyZKFloki",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x2fF94159b61621b0104A7cF60b2681bE9c352096",
+        "token0": {
+            "address": "0x115693D16143b2ABd53D2F1d79B54513b15CABe1",
+            "symbol": "pzkBTC",
+            "name": "PZkBTC",
+            "decimals": 9
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x72f0102c8f1DCa132F29E429a90CCB6c61397C6E",
+        "token0": {
+            "address": "0x064C32c9E899a9C493c725189cc8f675355A14Bb",
+            "symbol": "ZKEVMINU",
+            "name": "ZkEVM INU",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xa86a12c8FB31FAbFE2025e59961288a9e15efFE4",
+        "token0": {
+            "address": "0x4Bef892c8cE17d066290418E8d910362dbecc2fE",
+            "symbol": "1PZK",
+            "name": "One PolyZK",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x8f29c4B5CA902702080A82efA9f9B43C9C0B4067",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x5a9BD90138CB84616fAc21718885fadb0D18DFC0",
+            "symbol": "zMOON",
+            "name": "zkSafemoon",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x00d20f31caD5547dE86AdE97ce00692eEBd01a37",
+        "token0": {
+            "address": "0x0756925D26Ab17971e45F5a4856BDCe36a4A1dbF",
+            "symbol": "ZFLOKI",
+            "name": "ZKEVMFloki",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x707D7B0d63675F3C130145D29Ee3D08f970B0cd6",
+        "token0": {
+            "address": "0x3642a80eCd2Ba42899346e3A235E17d38D77092b",
+            "symbol": "ZKANGAL",
+            "name": "zKangal",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xA9ec6800490AB356aAe70ce4076501A5FE85929a",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xD5A51c81dE62123EAC819B7336A115Ee72319BD5",
+            "symbol": "SAITAMA",
+            "name": "SAITAMA",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x380143575250985616E0Ddb41C5c51df7e1bbB74",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xB3695A0A4a7a16b680E0fC20CC2ED93Bc28728dE",
+            "symbol": "zkpSnow",
+            "name": "ZKPolySnow",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x1ec6A32B30bE624Cfc6F1b7bAC16E01B3D1F86D0",
+        "token0": {
+            "address": "0x18078007105822Dcc8735c04F6104Fe8792DF07f",
+            "symbol": "GZK",
+            "name": "GoldenZK",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x5e3a44A4EC03a3dD13cB00d980903D19BCEc01B9",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xE45756897A1728B7207823d9b48214E9613e2B51",
+            "symbol": "zkPT",
+            "name": "PolyTools",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xEd1501C504833cfD7f845c83EdA5E167EB80B0F0",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x61E9E07e795Ab701bE1a516E11A0eDe3d8375A62",
+            "symbol": "pzkOHM",
+            "name": "pzkOHM",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x025eAA636BbE757697f49B1A6C0e117D708516d0",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xc802aA61a5B51A966B8975035db71688c8E84c7f",
+            "symbol": "pzkNYAN",
+            "name": "pzkNYAN",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x67edE10742419B3C306DE2Fc0130162EA59683c2",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xd67b6e20125Ca7a5Bda7C579D4D6785415Aa8C51",
+            "symbol": "pzKumRocket",
+            "name": "PZKUMROCKET",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x491604A446Dc8B2FEd923329826F247d89335573",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x6482981cB8c3984d5f04630B462d36BD3dDCB1e0",
+            "symbol": "polyzktest",
+            "name": "polyzktest",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x70bC6D22c995B9C4312F82f881934b49cc78811C",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xc3d12Dd065F6d648A285e02896E0DD65e09dCf97",
+            "symbol": "PZK",
+            "name": "PolyZkKishu",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xD6524c8Fb3e78bb54b066d7DAB6AFc9d0Ee3BCd3",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xf57be8616407f6DD37A19C4b05c8B324DA82758d",
+            "symbol": "pzkCULT",
+            "name": "pzkCULT",
+            "decimals": 8
+        }
+    },
+    {
+        "pair": "0x31b9c65128e5C925b6dA20AAE7cdB4092f8fb267",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xefB3c3B466cc01bB6353eC8675D9303724Ac24B4",
+            "symbol": "PZKRISE",
+            "name": "PZK Rise",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x711FB1d099a90415734427D53Ca387396A30A665",
+        "token0": {
+            "address": "0x35B040B395EbCf3e7d56402b98dF7c6098777434",
+            "symbol": "tax?",
+            "name": "AreTaxesWorking",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xBd22A780D3f3e2A875bfc3a9415f3C2ADFf8dd05",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x904968b81051Db5b3B5172B45803834c430680EF",
+            "symbol": "ShEraINU",
+            "name": "ShEraINU",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x9d1004cbcfEE75446B0F3ffc71e78C65dF1b2786",
+        "token0": {
+            "address": "0x18b607D9b1c2D32440A8FDa880C1283b597d8644",
+            "symbol": "ZKPEPE",
+            "name": "zkPoly Pepe",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xfe5E024d886D3E1707879F9D7fb020fFCeEAaA7A",
+        "token0": {
+            "address": "0x02491d1d5Eb563DA5636239e40CF512Bc3E6d86B",
+            "symbol": "ZkANO",
+            "name": "ZkAno",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x5A9c2859a9D8caB69D914DD4BD42F134406e8b07",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x69cEB627cB21131f1eB82818F5eb3055F5788F17",
+            "symbol": "zPEPE",
+            "name": "Poly ZK PEPE",
+            "decimals": 9
+        }
+    },
+    {
+        "pair": "0x59c8b0C0462dE0f3888A9746704dF0f05A78b81b",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x94e8eE08e1540D9BDFa58990353896677114A0E7",
+            "symbol": "PZKMOON",
+            "name": "PZKMOON",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x2c3f2A87B8AA8f201eec247cF7a682c4B6f3Df19",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x767C2f658910F876A748f76192cEDa85247329cE",
+            "symbol": "zPEPE",
+            "name": "Poly ZK PEPE",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xFB3f68ED6B33CFfd868d3e4dC03F2b54315f0701",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x87B801a9c990B1BC07831F05AA34C3e3B5AE936e",
+            "symbol": "zkPT",
+            "name": "PolyTools",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xc0C1bD81929998136f2506369e51Bd624b0f8e5f",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x68cfAF67BbAB05D4e9Bd30D074CF695b55263c33",
+            "symbol": "PZKTOMB",
+            "name": "PzkTomb Token",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x22b4c5F2661D8A4C06A7A36e49783BE412c9713C",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x6e40FAB36D63dBC38413011CF8cdF69912999c08",
+            "symbol": "PSHARE",
+            "name": "PSHARE Token",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x4412c7152c658967a3360F0A1472E701bDBeca9E",
+        "token0": {
+            "address": "0x1E4a5963aBFD975d8c9021ce480b42188849D41d",
+            "symbol": "USDT",
+            "name": "Tether USD",
+            "decimals": 6
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x0d23656536c88A9D98c2DC98Eb9321b6067dB7eE",
+        "token0": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        },
+        "token1": {
+            "address": "0xEf5EA65Dc4f4B1B87ae3Aa2Cb51Fb23C73E69a06",
+            "symbol": "ZKINU",
+            "name": "PolyZKINU",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x9591b8A30c3a52256ea93E98dA49EE43Afa136A8",
+        "token0": {
+            "address": "0x1E4a5963aBFD975d8c9021ce480b42188849D41d",
+            "symbol": "USDT",
+            "name": "Tether USD",
+            "decimals": 6
+        },
+        "token1": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        }
+    },
+    {
+        "pair": "0x1247B70c4b41890E8c1836E88DD0C8e3B23Dd60e",
+        "token0": {
+            "address": "0x68286607A1d43602d880D349187c3c48c0fD05E6",
+            "symbol": "QUICK",
+            "name": "QuickSwap",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        }
+    },
+    {
+        "pair": "0xB73AbFb5a2C89f4038baA476Ff3A7942A021c196",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xa2036f0538221a77A3937F1379699f44945018d0",
+            "symbol": "MATIC",
+            "name": "Matic Token",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x5dc3d61aeEE3212c9e00B0FBa6bc27Ee223c0A29",
+        "token0": {
+            "address": "0x2a0a7381a6C540B330e0d1990145780C99941BBC",
+            "symbol": "GOAT",
+            "name": "zkGoat",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xe7d34853084567105Fb937FF64Af7943AaED2E7D",
+        "token0": {
+            "address": "0x0710d408F07aF68B8a6Ae2A48b8110475E7691B1",
+            "symbol": "BzB",
+            "name": "BlazarBits",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x6Aaaffaeae404ac61fFC85E8781b4690F86d4066",
+        "token0": {
+            "address": "0x1402D5A4F67C22Bff31883dD509EF59cBe930B88",
+            "symbol": "NFTE",
+            "name": "NFTEarth",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xc44A71b0c932751B1851fe2eF01011a005fC0120",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x68286607A1d43602d880D349187c3c48c0fD05E6",
+            "symbol": "QUICK",
+            "name": "QuickSwap",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xc9853F9f29CDd15Ece6965e20Ca288A2946C15E6",
+        "token0": {
+            "address": "0xa2036f0538221a77A3937F1379699f44945018d0",
+            "symbol": "MATIC",
+            "name": "Matic Token",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        }
+    },
+    {
+        "pair": "0xe30714A33Df05c77D533880aef3069b1CF99E6c1",
+        "token0": {
+            "address": "0x40DF0C3BBAAE5Ea3A509d8F2aa9E086776C98E6c",
+            "symbol": "ATF",
+            "name": "Antfarm Token",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xe30ea03ceb922544373a71E129f1a955BF88593C",
+        "token0": {
+            "address": "0x3849e5788c828F9f70EB956c420fB11d717f49C5",
+            "symbol": "STALIN",
+            "name": "Stalin",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x40750d30Ee4a60Da987135ca1d0B6d224BdE8Fae",
+        "token0": {
+            "address": "0x68286607A1d43602d880D349187c3c48c0fD05E6",
+            "symbol": "QUICK",
+            "name": "QuickSwap",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xa2036f0538221a77A3937F1379699f44945018d0",
+            "symbol": "MATIC",
+            "name": "Matic Token",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xFC4A3A7dc6b62bd2EA595b106392f5E006083b83",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xEA034fb02eB1808C2cc3adbC15f447B93CbE08e1",
+            "symbol": "WBTC",
+            "name": "Wrapped BTC",
+            "decimals": 8
+        }
+    },
+    {
+        "pair": "0x1Cd1D779CFd8E86b40a254046377561Ea76E22e4",
+        "token0": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        },
+        "token1": {
+            "address": "0xEA034fb02eB1808C2cc3adbC15f447B93CbE08e1",
+            "symbol": "WBTC",
+            "name": "Wrapped BTC",
+            "decimals": 8
+        }
+    },
+    {
+        "pair": "0x8f2A1450C040B3c19eFE9676165d8f30d8280019",
+        "token0": {
+            "address": "0x83b874c1e09D316059d929da402dcB1A98e92082",
+            "symbol": "stMATIC",
+            "name": "Staked MATIC",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xa2036f0538221a77A3937F1379699f44945018d0",
+            "symbol": "MATIC",
+            "name": "Matic Token",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x68cc0516162b423930cD8448A2a00310E841E7f5",
+        "token0": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        },
+        "token1": {
+            "address": "0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4",
+            "symbol": "DAI",
+            "name": "Dai Stablecoin",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xC033e1510528F1ACed09af52F728D6bBDD9959B8",
+        "token0": {
+            "address": "0x1E4a5963aBFD975d8c9021ce480b42188849D41d",
+            "symbol": "USDT",
+            "name": "Tether USD",
+            "decimals": 6
+        },
+        "token1": {
+            "address": "0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4",
+            "symbol": "DAI",
+            "name": "Dai Stablecoin",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0xcAaA9869581000cd760884A663C05B0F6B1B8b5F",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4",
+            "symbol": "DAI",
+            "name": "Dai Stablecoin",
+            "decimals": 18
+        }
+    },
+    {
+        "pair": "0x233f4971428fEFe668918C755B667189642c2d57",
+        "token0": {
+            "address": "0x1fA03eDB1B8839a5319A7D2c1Ae6AAE492342bAD",
+            "symbol": "MANGO",
+            "name": "Mango Farmers Club",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
+            "symbol": "USDC",
+            "name": "USD Coin",
+            "decimals": 6
+        }
+    },
+    {
+        "pair": "0x270d6550286c2B39e8B435B02ac8Bf467C5B70fc",
+        "token0": {
+            "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+            "symbol": "WETH",
+            "name": "Wrapped Ether",
+            "decimals": 18
+        },
+        "token1": {
+            "address": "0x8ce85f2C0EBC54649ab89f58A06ECad6BF8eEfe9",
+            "symbol": "ZERO",
+            "name": "Zero Utility",
+            "decimals": 18
+        }
+    }
+]
