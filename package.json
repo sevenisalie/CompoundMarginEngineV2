@@ -27,12 +27,18 @@
     "node": "^14.18.0 || ^16.14.0 || >=18.0.0"
   },
   "dependencies": {
+    "@ethersproject/solidity": "^5.7.0",
     "@openzeppelin/contracts": "^4.8.3",
     "@openzeppelin/contracts-upgradeable": "^4.8.3",
-    "chalk": "^5.2.0",
+    "@uniswap/sdk": "^3.0.3",
+    "@uniswap/sdk-core": "^3.2.4",
+    "@uniswap/v3-sdk": "^3.9.0",
+    "bignumber.js": "^9.1.1",
+    "chalk": "4.1.2",
     "dotenv": "^16.0.3",
     "ethers-multicall": "^0.2.3",
     "ethers-multicall-provider": "sevenisalie/ethers-multicall-provider",
+    "jsbi": "^4.3.0",
     "mongoose": "^7.1.0"
   }
 }

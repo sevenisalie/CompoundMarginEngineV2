@@ -3,6 +3,7 @@ import * as dotenv from "dotenv"
 import { ethers } from "ethers";
 import { Contract, Provider } from 'ethers-multicall';
 import { logDebug, logError, logTrace } from "./logging"
+import fs from 'fs';
 
 dotenv.config()
 
@@ -95,4 +96,35 @@ export const getBatches = (objects: any[], batchSize: number): any[][] => {
 
     // Return the array of batches
     return batches;
+}
+
+//this is here because its unreadable in the Trade class constructor
+export const pullTokenInfoSync = (_token: string) => {
+    function fetchAllPairs() {
+        function readJsonFromFile(path: any) {
+            try {
+                const jsonData = fs.readFileSync(path, 'utf8');
+                const data = JSON.parse(jsonData);
+                return data;
+            } catch (err) {
+                console.error('Error reading JSON file:', err);
+                return null;
+            }
+        }
+        const d = readJsonFromFile("scripts/config/pairs.json")
+        return d
+    }
+    const p = fetchAllPairs()
+    const cIn = p.map((pair: any) => {
+        if (pair.token0.address == _token) {
+            return pair.token0
+        }
+        if (pair.token1.address == _token) {
+            return pair.token1
+        }
+    })
+    const tIn = cIn.filter((results: any) => {
+        return results !== undefined
+    })
+    return tIn[0] //first result is fine since we dont need pairs, just static token info
 }

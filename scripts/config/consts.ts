@@ -1,6 +1,8 @@
 import TOKENLIST from "./TOKENLIST.json"
 import V3FACTORYABI from "./v3FactoryAbi.json"
 import V3ROUTERABI from "./v3SwapRouterAbi.json"
+import V3POOLABI from "./v3Pool.json"
+import V3QUOTERABI from "./quickSwapQuoter.json"
 import * as ethers from "ethers"
 
 export const transactionParams = {
@@ -14,6 +16,13 @@ export const transactionParams = {
   }
 }
 //ABI SNIPPETS
+export const QuoterAbi = [
+  "function quoteExactInputSingle(address tokenIn, address tokenOut, uint24 fee, uint256 amountIn, uint160 sqrtPriceLimitX96) public returns (uint256 amountOut)",
+  "function quoteExactInput( bytes path, uint256 amountIn ) external returns (uint256 amountOut)",
+  "function quoteExactOutputSingle( address tokenIn, address tokenOut, uint24 fee, uint256 amountOut, uint160 sqrtPriceLimitX96 ) public returns (uint256 amountIn)",
+  "function quoteExactOutput( bytes path, uint256 amountOut ) external returns (uint256 amountIn)"
+]
+
 export const IERC20Metadata = [
   "function name() external view returns (string memory)",
   "function symbol() external view returns (string memory)",
@@ -46,6 +55,10 @@ export const UniswapV2Factory = [
 export const SpecialMintERC20 = [
   "function mintTo(address to,uint256 amount) public"
 ]
+export const V3Pool = V3POOLABI
+export const V3Factory = V3FACTORYABI
+export const V3Router = V3ROUTERABI
+
 export const PingerAddress = "0xd63956503e7869a25FeD40AF20073359475a71b1"
 
 
@@ -59,46 +72,54 @@ export const ExternalContracts = {
     quickswapRouterV3: {
       address: "0xF6Ad3CcF71Abb3E12beCf6b3D2a74C963859ADCd",
       abi: V3ROUTERABI
+    },
+    quickSwapQuoterV3: {
+      address: "0x55BeE1bD3Eb9986f6d2d963278de09eE92a3eF1D",
+      abi: V3QUOTERABI
     }
   }
 }
 
+export const WETH = {
+  zkevm: "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9"
+}
+
 export const BaseTokens = [
   {
-    "name": "Wrapped BTC",
-    "address": "0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6",
+    "address": "0xEA034fb02eB1808C2cc3adbC15f447B93CbE08e1",
     "symbol": "WBTC",
-    "decimals": 8,
+    "name": "Wrapped BTC",
+    "decimals": 8
   },
   {
-    "name": "Wrapped Matic",
-    "address": "0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270",
-    "symbol": "WMATIC",
-    "decimals": 18,
+    "address": "0xa2036f0538221a77A3937F1379699f44945018d0",
+    "symbol": "MATIC",
+    "name": "Matic Token",
+    "decimals": 18
   },
   {
-    "name": "Ether",
-    "address": "0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619",
-    "symbol": "ETH",
-    "decimals": 18,
+    "address": "0x4F9A0e7FD2Bf6067db6994CF12E4495Df938E6e9",
+    "symbol": "WETH",
+    "name": "Wrapped Ether",
+    "decimals": 18
   },
   {
-    "name": "USD Coin",
-    "address": "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+    "address": "0xA8CE8aee21bC2A48a5EF670afCc9274C7bbbC035",
     "symbol": "USDC",
-    "decimals": 6,
+    "name": "USD Coin",
+    "decimals": 6
   },
   {
-    "name": "Tether USD",
-    "address": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F",
+    "address": "0x1E4a5963aBFD975d8c9021ce480b42188849D41d",
     "symbol": "USDT",
-    "decimals": 6,
+    "name": "Tether USD",
+    "decimals": 6
   },
   {
-    "name": "Dai Stablecoin",
-    "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+    "address": "0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4",
     "symbol": "DAI",
-    "decimals": 18,
+    "name": "Dai Stablecoin",
+    "decimals": 18
   },
 ]
 
