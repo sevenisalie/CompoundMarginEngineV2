@@ -1,7 +1,7 @@
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { ethers } from "hardhat"
 import FactoryABI from "./config/v3FactoryAbi.json"
-import { BaseTokens, ERC20, ExternalContracts, IERC20Metadata, SpecialMintERC20, V3Pool, WETH } from "./config/consts";
+import { BaseTokens, ERC20, ExternalContracts, IERC20Metadata, SpecialMintERC20, V3Pool, V3Router, WETH } from "./config/consts";
 import fs from 'fs';
 import { BigNumber, Contract } from "ethers";
 import JSBI from "jsbi"
@@ -15,6 +15,7 @@ import path from 'path';
 export class Trade {
     private signer: SignerWithAddress;
     public quoter: Contract;
+    public router: Contract;
     public player: Address;
     public WETH: Address = WETH.zkevm
     public path: PairObject[] = []
@@ -23,16 +24,20 @@ export class Trade {
     public adjacentPairs: PairObject[] = []
     public paths: PairObject[][] = []
     public maxHops: number;
+    public amountIn: string;
     // public wrappedNative: Currency;
 
-    constructor(_tokenIn: Address | "ETH", _tokenOut: Address | "ETH", _maxHops = 4, _signer: SignerWithAddress) {
+    constructor(_amountIn: string, _tokenIn: Address | "ETH", _tokenOut: Address | "ETH", _maxHops = 4, _signer: SignerWithAddress) {
         //init
         this.signer = _signer
         this.player = _signer.address
-        const { address, abi } = ExternalContracts.zkevm.quickSwapQuoterV3
-        this.quoter = new ethers.Contract(address, abi, _signer)
-        this.maxHops = _maxHops
+        const { address: qaddress, abi: qabi } = ExternalContracts.zkevm.quickSwapQuoterV3
+        const { address: raddress, abi: rabi } = ExternalContracts.zkevm.quickswapRouterV3
 
+        this.quoter = new ethers.Contract(qaddress, qabi, _signer)
+        this.router = new ethers.Contract(raddress, rabi, _signer)
+        this.maxHops = _maxHops
+        this.amountIn = _amountIn
         //token init
         const tokenInInfo = pullTokenInfoSync(_tokenIn)
         const tokenOutInfo = pullTokenInfoSync(_tokenOut)
@@ -123,6 +128,7 @@ export class Trade {
             if (this.tokenEquals(outputToken, tokenOut)) {
                 allPaths.push([...currentPath, pool])
             } else if (maxHops > 1) {
+
                 this.computeAllRoutes(
                     outputToken,
                     currencyOut,
@@ -148,16 +154,19 @@ export class Trade {
         }
         const call: BigNumber = await this.quoter.callStatic.quoteExactInput(
             pack(new Array(_route.length).fill("address"), _route),
-            ethers.utils.parseUnits("1")
+            ethers.utils.parseUnits(this.amountIn, this.tokenIn.decimals)
         )
         console.log(`
-        You get ${ethers.utils.formatUnits(call, this.tokenOut.decimals)} ${this.tokenOut.symbol}s for every 1 ${this.tokenIn.symbol}s
+        You get ${ethers.utils.formatUnits(call, this.tokenOut.decimals)} ${this.tokenOut.symbol}s for every ${this.amountIn} ${this.tokenIn.symbol}s
         `)
         console.log(call)
 
         return call
     }
 
+    public swap() {
+        const tx = this.router.
+    }
 }
 
 type Address = string

@@ -14,9 +14,9 @@
     "@types/mocha": ">=9.1.0",
     "@types/node": ">=12.0.0",
     "chai": "^4.2.0",
-    "ethers": "^5.4.7",
+    "ethers": "5.4.7",
     "hardhat": "^2.14.0",
-    "hardhat-gas-reporter": "^1.0.8",
+    "hardhat-gas-reporter": "^1.0.9",
     "prisma": "^4.13.0",
     "solidity-coverage": "^0.8.0",
     "ts-node": ">=8.0.0",
@@ -33,12 +33,14 @@
     "@uniswap/sdk": "^3.0.3",
     "@uniswap/sdk-core": "^3.2.4",
     "@uniswap/v3-sdk": "^3.9.0",
+    "abi-decoder": "^2.4.0",
     "bignumber.js": "^9.1.1",
     "chalk": "4.1.2",
     "dotenv": "^16.0.3",
     "ethers-multicall": "^0.2.3",
     "ethers-multicall-provider": "sevenisalie/ethers-multicall-provider",
     "jsbi": "^4.3.0",
-    "mongoose": "^7.1.0"
+    "mongoose": "^7.1.0",
+    "web3-eth-abi": "^4.0.1"
   }
 }
