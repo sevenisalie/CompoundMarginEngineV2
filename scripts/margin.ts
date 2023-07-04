@@ -25,7 +25,7 @@ const main = async () => {
     const provider = new ethers.providers.WebSocketProvider(process.env.WSS_RPC_URL as any)
     const signerProvider = new ethers.providers.JsonRpcProvider(process.env.HTTPS_RPC_URL as string, 137)
     const signer = new ethers.Wallet(process.env.PRIVATE_KEY as string, signerProvider)
-    const poolinator = new Poolinator(provider, "matic")
+    const poolinator = new Poolinator(provider, 137)
 
     const createFactory = (_factoryAddress: string) => {
         return new ethers.Contract(_factoryAddress, v2FactoryAbi, signer)
@@ -120,20 +120,6 @@ const main = async () => {
         // const p = await Promise.all([t1, t2])
 
 
-        // const call: BigNumber = await this.quoter.callStatic.quoteExactInput(
-        //     pack(new Array(_route.length).fill("address"), _route),
-        //     ethers.utils.parseUnits(this.amountIn, this.tokenIn.decimals)
-        // )
-        // return {
-        //     tx1: {
-        //         status: ,
-        //         data: 
-        //     },
-        //     tx2: {
-        //         status: ,
-        //         data: 
-        //     }
-        // }
     }
     const simulateTransaction = async (t: TransactionResponse, _provider: Provider) => {
         const transaction = {
@@ -189,8 +175,8 @@ const main = async () => {
 
                     if (_selector) {
                         const dargs = router.interface.decodeFunctionData(t.data.slice(0, 10), t.data)
-                        const pr = poolinator.checkFactory(poolinator.UniswapFactoryAddress as string, dargs.path[0], dargs.path[1])
-                        const cpr = poolinator.checkFactory(poolinator.SushiFactoryAddress as string, dargs.path[0], dargs.path[1])
+                        const pr = poolinator.checkFactory(poolinator.BaseFactoryAddress as string, dargs.path[0], dargs.path[1])
+                        const cpr = poolinator.checkFactory(poolinator.ContraFactoryAddress as string, dargs.path[0], dargs.path[1])
                         const [pair, contraPair] = await Promise.all([pr, cpr])
                         if (pair == false || contraPair == false) { return }
                         const [token0, token1, factoryToCheck] = await poolinator.checkPool(pair) // Get the pool and the other factory we need to check
