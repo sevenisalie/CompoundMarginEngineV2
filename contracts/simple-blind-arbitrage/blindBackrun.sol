@@ -69,7 +69,7 @@ contract BlindBackrun is Ownable {
 
         uint256 amountIn = getAmountIn(firstPairData, secondPairData);
         if (amountIn > balanceBefore) {
-            amountIn = balanceBefore - 1;
+            amountIn = balanceBefore.sub(1);
         }
         IERC20(WETH_ADDRESS).transfer(firstPairAddress, amountIn);
 
@@ -253,7 +253,8 @@ contract BlindBackrun is Ownable {
     /// @dev Only the contract owner can call this function.
     function withdrawWETHToOwner() external onlyOwner {
         uint256 balance = IERC20(WETH_ADDRESS).balanceOf(address(this));
-        IERC20(WETH_ADDRESS).transfer(msg.sender, balance);
+        bool status = IERC20(WETH_ADDRESS).transfer(msg.sender, balance);
+        require(status == true, "Transfer Unsuccessful");
     }
 
     /// @notice Transfers all ETH held by the contract to the contract owner.

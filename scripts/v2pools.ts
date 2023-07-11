@@ -57,7 +57,7 @@ export class Poolinator {
         }
     }
 
-    async checkFactory(_factoryAddress: string, _token0: string, _token1: string) {
+    async checkFactory(_factoryAddress: string, _token0: string, _token1: string): Promise<boolean | string> {
         // Create an ethers contract object for the factory
         const factoryContract = new ethers.Contract(_factoryAddress, factoryABI, this.provider)
         // console.log("Checking alternative factor for pair")

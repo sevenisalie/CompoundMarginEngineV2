@@ -8,14 +8,14 @@ import v2RouterAbi from "./config/v2RouterAbi.json"
 import { TransactionResponse } from "@ethersproject/providers"
 import { logError, logInfo } from "./logging"
 import { Interface } from "@ethersproject/abi"
-import { checkPairsForWeth } from "./executorUtils"
+import { checkPairsForWeth, simulateTrades } from "./executorUtils"
 import { Poolinator } from "./v2pools"
 
-export const syncExecutor = (txHash: string) => {
+export const syncExecutor = (txHash: string, signer: any) => {
     const factories = v2Markets.map(market => market.factory.toLowerCase())
     const routers = v2Markets.map(market => market.router.toLowerCase())
     const selectors: any = functionSelectors
-    const provider = new ethers.providers.JsonRpcProvider(process.env.HTTPS_RPC_URL as any)
+    const provider = new ethers.providers.JsonRpcProvider(process.env.HTTPS_RPC_URL as any, 137)
     const v2PairInterface = new Interface(UniswapV2PairABI)
     const poolinator = new Poolinator(provider, 137)
 
@@ -42,8 +42,22 @@ export const syncExecutor = (txHash: string) => {
 
                         const pairs = data.map((entry) => entry.pair)
                         const pairDataPromises = await checkPairsForWeth(provider, pairs)
-
+                        const sanityCheckedPairs = pairDataPromises?.map((data) => {
+                            if (data == "noAlternativePair" || data == undefined) { return } else {
+                                return [data.basePair, data.contraPair]
+                            }
+                        })
                         console.log("clientSide PairData", pairDataPromises)
+                        const simmed = sanityCheckedPairs?.map((pairs) => {
+                            if (typeof pairs !== 'undefined') {
+                                return simulateTrades(signer, pairs)
+                            }
+                        })
+                        const simmedCleaned = simmed?.filter((sim) => {
+                            return sim !== undefined
+                        }) as Promise<void>[]
+
+                        const simmedResults = await Promise.all(simmedCleaned)
                     } catch (error) {
                         // logInfo("Get Decoded Logs Error", error)
                         console.log(error)

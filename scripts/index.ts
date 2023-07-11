@@ -9,6 +9,7 @@ import { TransactionResponse } from "@ethersproject/providers"
 import { logInfo } from "./logging"
 import { Interface } from "@ethersproject/abi"
 import { syncExecutor } from "./executors"
+import { withdrawTokens } from "./executorUtils"
 const signature = "function getAccountLiquidity(address account) public view returns (uint256, uint256, uint256)"
 
 const main = async () => {
@@ -35,6 +36,7 @@ const main = async () => {
 
     const L = new Listenator(qrouter, "Sync(uint112,uint112)", syncExecutor)
     L.onPending()
+    // await withdrawTokens()
 }
 
 main()

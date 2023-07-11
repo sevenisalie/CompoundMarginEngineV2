@@ -3,7 +3,12 @@ import { BackRunFLContract } from "./config/consts"
 import BackRunFLAbi from "../artifacts/contracts/simple-blind-arbitrage/blindBackrunFL.sol/BlindBackrunFL.json"
 import { Poolinator } from "./v2pools"
 
-export const checkPairsForWeth = async (_signer: any, _pairs: string[]) => {
+export const checkPairsForWeth = async (_signer: any, _pairs: string[]): Promise<(false | {
+    basePair: string;
+    contraPair: string | true;
+    token0: any;
+    token1: any;
+})[]> => {
     //check basepool for weth and get tokens
     //then use tokens to find contrapool
     //return both pool addresses <<<<
@@ -12,21 +17,23 @@ export const checkPairsForWeth = async (_signer: any, _pairs: string[]) => {
     const r = await Promise.all(p)
     // console.log("serverside PairData", r)
     const fr = r.filter((data) => data[0] !== false || data[1] !== false || data[2] !== false)
-    if (!(fr.length > 0)) { return }
+    if (!(fr.length > 0)) { return [] }
     const token0 = fr[0][0]
     const token1 = fr[0][1]
     const basePairAddress = fr[0][2]
     const t = r.map((data) => {
-        if (data[0] == false || data[1] == false) { return }
+        if (data[0] == false || data[1] == false) { return false }
         const d = poolinator.checkFactory(poolinator.ContraFactoryAddress as string, data[0], data[1])
         return d
     })
-    const tr = await Promise.all(t)
-    const ftr = tr.filter((item => item !== undefined))
+    const ft = t.filter(ftdata => { return ftdata !== false })
+    const tr = await Promise.all(ft)
+    const ftr = tr.filter((item => { return typeof item !== undefined }))
     const ctr = ftr.map((item, i) => {
         if (item == false) {
-            return "noAlternativePair"
-        } else {
+            return false
+        }
+        if (item) {
             return {
                 basePair: _pairs[i], //look at me im an asshole (this is possible because we used array methods which preserve ordering when iterating over arrays)
                 contraPair: item,
@@ -34,10 +41,18 @@ export const checkPairsForWeth = async (_signer: any, _pairs: string[]) => {
                 token1: token1
             }
         }
-
+        return false
     })
-    // console.log("serverside Factory Check", tr)
-    return ctr
+    const ctrf = ctr.filter((item => item !== false))
+    return ctrf.map((item) => item)
+}
+
+export const withdrawTokens = async () => {
+    const c = await ethers.getContractFactory("BlindBackrunFL");
+    const ctr = c.attach(BackRunFLContract)
+    const call = await ctr.withdrawWETHToOwner()
+    const receipt = await call.wait()
+    return receipt
 }
 
 export const simulateTrades = async (_signer: any, pairs: string[],) => {

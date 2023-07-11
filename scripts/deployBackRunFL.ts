@@ -1,12 +1,13 @@
 import { ethers, run } from "hardhat";
 import dotenv from 'dotenv'
+import { tokens } from "./config/consts";
 
 dotenv.config()
 
 async function main() {
 
     const BackRunFactory = await ethers.getContractFactory("BlindBackrunFL");
-    const BackRun = await BackRunFactory.deploy("0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619");
+    const BackRun = await BackRunFactory.deploy(tokens.matic.MATIC);
 
     await BackRun.deployed();
 
